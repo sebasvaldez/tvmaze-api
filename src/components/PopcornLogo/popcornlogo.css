@@ -1,0 +1,9 @@
+.logo-popcorn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.logo-popcorn img{
+width: 100%;
+}
