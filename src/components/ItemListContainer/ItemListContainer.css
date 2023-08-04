@@ -1,0 +1,9 @@
+@media all and (min-width:360px){
+    .container-movies{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-around;
+        margin-top: 2rem;
+    }
+}
