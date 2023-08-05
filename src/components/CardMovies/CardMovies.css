@@ -5,7 +5,7 @@
 
 @media all and (min-width: 360px) {
   .card-styles {
-    width: 182px;
+    width: 160px;
 
     margin-bottom: 1rem;
     border: none;
@@ -17,6 +17,8 @@
   .card-title {
     color: whitesmoke;
     background-color: #1a3249;
+    text-align: end;
+    font-size: 14px;
   }
   .link{
     color: whitesmoke;

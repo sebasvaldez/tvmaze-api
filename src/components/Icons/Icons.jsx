@@ -34,3 +34,26 @@ export const SearchIcon = () => {
     </svg>
   );
 };
+
+export const Separator = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="340"
+      height="1"
+      viewBox="0 0 360 1"
+      className="mx-auto"
+    >
+      <line
+        id="Línea_38"
+        data-name="Línea 38"
+        x2="360"
+        transform="translate(0 0.5)"
+        fill="none"
+        stroke="#fff"
+        strokeWidth="1"
+        opacity="0.09"
+      />
+    </svg>
+  );
+};

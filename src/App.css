@@ -8,7 +8,8 @@
   
 }
 body{
-  background-color: #1A3249!important;
+  background-color: #1A3249;
+  font-family: 'Nunito', sans-serif;
 }
 .container-logo{
   display: grid;
