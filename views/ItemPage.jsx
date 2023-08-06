@@ -1,7 +1,15 @@
-import React from "react";
+import ItemDetailContainer from "../src/components/ItemDetailContainer/ItemDetailContainer";
+
 
 const ItemPage = () => {
-  return <h1>ItemPage asadsa</h1>;
+ 
+
+  return (
+    <div>
+      <ItemDetailContainer />
+      
+    </div>
+  );
 };
 
 export default ItemPage;

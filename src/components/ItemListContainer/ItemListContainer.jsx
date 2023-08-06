@@ -1,21 +1,25 @@
 import "./ItemListContainer.css";
 import { getMovies } from "../../../asyncMock.js";
 import CardMovies from "../CardMovies/CardMovies.jsx";
-import { useState, useEffect } from "react";
-
-
-
+import { useState, useEffect, useContext } from "react";
+import { SearchContext } from "../../contexts/SearchProvider";
 
 const ItemListContainer = () => {
   const [movies, setMovies] = useState([]);
+  const [search, setSearch] = useContext(SearchContext);
 
   useEffect(() => {
-    getMovies("star wars").then((data) => setMovies(data));
+    getMovies().then((data) => setMovies(data));
   }, []);
+
 
   return (
     <div className="container-movies">
-      <CardMovies movies={movies} />
+      {search.length > 0 ? (
+        <CardMovies movies={search} />
+      ) : (
+        <CardMovies movies={movies} />
+      )}
     </div>
   );
 };

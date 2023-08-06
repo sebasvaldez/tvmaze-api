@@ -5,10 +5,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "../views/HomePage";
 import SearchPage from "../views/SearchPage";
 import ItemPage from "../views/ItemPage";
+import SearchProvider from "./contexts/SearchProvider";
 
 const App = () => {
   return (
-    <>
+    <SearchProvider>
       <Router>
         <Navbar />
         <Routes>
@@ -19,7 +20,7 @@ const App = () => {
           <Route path="/register" element={<h1>Register Page</h1>} />
         </Routes>
       </Router>
-    </>
+    </SearchProvider>
   );
 };
 

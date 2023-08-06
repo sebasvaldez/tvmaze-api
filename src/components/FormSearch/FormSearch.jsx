@@ -1,31 +1,34 @@
-import './FormSearch.css'
-import { useState } from "react";
-import { getMovies } from '../../../asyncMock';
-
+import "./FormSearch.css";
+import { useState, useContext } from "react";
+import { getMovies } from "../../../asyncMock";
+import { SearchContext } from "../../contexts/SearchProvider";
 
 const FormSearch = () => {
-  const [search, setSearch] = useState("");
+  const [textValue, setTextValue] = useState("");
+  const [search, setSearch] = useContext(SearchContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-  }
-
+    getMovies(textValue).then((data) => {
+      setSearch(data);
+     
+    });
+  };
 
   return (
-    <div >
-      <form className="text-white" onSubmit={handleSubmit}>
+    <div>
+      <form className="mb-4 " onSubmit={handleSubmit}>
         <input
           onChange={(e) => {
-            setSearch(e.target.value);
+            setTextValue(e.target.value);
           }}
           type="text"
           placeholder="Buscar"
-          value={search}
+          value={textValue}
           className="form-search-input "
         />
       </form>
-      {`texto: ${search}`}
+      
     </div>
   );
 };

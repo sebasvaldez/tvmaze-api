@@ -11,6 +11,7 @@ const SearchPage = () => {
       <FormSearch />
       <h3 className="text-white text-start mx-5">Películas</h3>
       <Separator />
+      
       <ItemListContainer />
     </div>
   );
