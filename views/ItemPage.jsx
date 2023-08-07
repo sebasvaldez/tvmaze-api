@@ -5,10 +5,10 @@ const ItemPage = () => {
  
 
   return (
-    <div>
+
       <ItemDetailContainer />
       
-    </div>
+  
   );
 };
 

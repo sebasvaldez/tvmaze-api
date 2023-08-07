@@ -12,6 +12,8 @@ export const getMovies = async (search = "Star Wars") => {
   }
 };
 
+
+
 //busqueda por id
 
 export const getMovieId = async (id) => {
@@ -19,7 +21,7 @@ export const getMovieId = async (id) => {
   try {
     const response = await axios.get(apiUrl);
 
-    return response.data;
+    return  response.data;
   } catch (error) {
     console.error(`Error al realizar la solicitud ${error}`);
   }

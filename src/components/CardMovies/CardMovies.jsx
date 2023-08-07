@@ -3,9 +3,7 @@ import { Link } from "react-router-dom";
 import sinPortada from "./assets/sin-portada.png";
 
 const CardMovies = ({ movies }) => {
- 
-
-  return movies.map(({  show }) => {
+  return movies.map(({ show }) => {
     return (
       <div className="card-styles" key={show.id}>
         <Link to={`/item/${show.id}`} className="link">

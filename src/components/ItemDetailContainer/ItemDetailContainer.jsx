@@ -3,19 +3,29 @@ import { useState, useEffect } from "react";
 import { getMovieId } from "../../../asyncMock";
 import ItemDetail from "../ItemDetail/ItemDetail";
 
-
 const ItemDetailContainer = () => {
-    const [item, setItem] = useState(null);
-    const {id} = useParams();
+  const [item, setItem] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  const { id } = useParams();
 
-    useEffect(() => {
+  useEffect(() => {
+    try {
+      
         getMovieId(id).then((data) => setItem(data));
-    }, [id]);
+        setIsLoading(false);
+      
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+    }
+  }, []);
 
   
   return (
-    <div ><ItemDetail {...item}  /></div>
-  )
-}
 
-export default ItemDetailContainer
+    <ItemDetail item={item} isLoading={isLoading} />
+
+  );
+};
+
+export default ItemDetailContainer;
