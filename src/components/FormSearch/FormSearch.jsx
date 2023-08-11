@@ -2,17 +2,24 @@ import "./FormSearch.css";
 import { useState, useContext } from "react";
 import { getMovies } from "../../../asyncMock";
 import { SearchContext } from "../../contexts/SearchProvider";
+import { Navigate } from "react-router-dom";
 
 const FormSearch = () => {
   const [textValue, setTextValue] = useState("");
   const [search, setSearch] = useContext(SearchContext);
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    getMovies(textValue).then((data) => {
-      setSearch(data);
-     
-    });
+    if (textValue === "") {
+      console.log("El usuario no ha ntroducido ningun valor");
+      return;
+    } else {
+      getMovies(textValue).then((data) => {
+        setSearch(data);
+        
+      });
+    }
   };
 
   return (
@@ -26,9 +33,9 @@ const FormSearch = () => {
           placeholder="Buscar"
           value={textValue}
           className="form-search-input "
+          required
         />
       </form>
-      
     </div>
   );
 };

@@ -1,24 +1,3 @@
-/* .form-search-input{
-    background-color:transparent;
-    position: relative;
-    border-radius: 12px;
-    width: 358px;
-    height: 51px;
-    opacity: .05;
-    color: white;
-    border: none;
-}
-
-.form-search-input::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #1A3249;
-    opacity: 0.05; 
-  } */
 
 form input {
   position: relative;

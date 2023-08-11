@@ -6,6 +6,8 @@ import HomePage from "../views/HomePage";
 import SearchPage from "../views/SearchPage";
 import ItemPage from "../views/ItemPage";
 import SearchProvider from "./contexts/SearchProvider";
+import Login from "./components/Login/Login";
+import Register from "./components/Register/Register";
 
 const App = () => {
   return (
@@ -14,10 +16,10 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/movieslist" element={<SearchPage/>} />
-          <Route path="/item/:id" element={<ItemPage/>} />
-          <Route path="/login" element={<h1>Login Page</h1>} />
-          <Route path="/register" element={<h1>Register Page</h1>} />
+          <Route path="/movieslist" element={<SearchPage />} />
+          <Route path="/item/:id" element={<ItemPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register/>} />
         </Routes>
       </Router>
     </SearchProvider>

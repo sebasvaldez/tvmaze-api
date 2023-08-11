@@ -1,10 +1,15 @@
 import { Link } from "react-router-dom";
 import "./Navbar.css";
-import { HomeIcon, SearchIcon } from "../Icons/Icons";
+import { HomeIcon, Login, SearchIcon } from "../Icons/Icons";
 const Navbar = () => {
   return (
     <div className="navbar-class ">
       <div className="icons-home d-flex">
+        <div>
+          <Link to="/login">
+            <Login />
+          </Link>
+        </div>
         <div className="mx-3">
           <Link to="/">
             <HomeIcon />
@@ -21,7 +26,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-
-
-

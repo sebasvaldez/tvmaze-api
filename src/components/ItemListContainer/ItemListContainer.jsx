@@ -12,7 +12,6 @@ const ItemListContainer = () => {
     getMovies().then((data) => setMovies(data));
   }, []);
 
-
   return (
     <div className="container-movies">
       {search.length > 0 ? (
