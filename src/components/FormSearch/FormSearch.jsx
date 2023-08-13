@@ -2,12 +2,14 @@ import "./FormSearch.css";
 import { useState, useContext } from "react";
 import { getMovies } from "../../../asyncMock";
 import { SearchContext } from "../../contexts/SearchProvider";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const FormSearch = () => {
   const [textValue, setTextValue] = useState("");
   const [search, setSearch] = useContext(SearchContext);
 
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,6 +22,7 @@ const FormSearch = () => {
         
       });
     }
+    navigate("/movieslist")
   };
 
   return (

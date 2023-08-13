@@ -1,6 +1,7 @@
 import "./ItemDetail.css";
 import Loader from "../Loader/Loader";
 import sinPortada from "./assets/sin-portada.png";
+import  FormSearch from "../FormSearch/FormSearch";
 
 const ItemDetail = ({ item, isLoading }) => {
   const { name, genres, summary, url, image, webChannel, language } = item;
@@ -9,6 +10,7 @@ const ItemDetail = ({ item, isLoading }) => {
 
   return (
     <div>
+      <FormSearch />
       {isLoading ? (
         <div className="d-flex justify-content-center mt-5">
           <Loader />
