@@ -2,6 +2,8 @@ import { createContext, useState } from "react";
 
 export const SearchContext = createContext();
 
+
+
 const SearchProvider = ({ children }) => {
   const [search, setSearch] = useState([]);
   return (

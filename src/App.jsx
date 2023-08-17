@@ -8,9 +8,11 @@ import ItemPage from "../views/ItemPage";
 import SearchProvider from "./contexts/SearchProvider";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
+import { AuthProvider } from "./contexts/AuthProvider";
 
 const App = () => {
   return (
+    <AuthProvider>
     <SearchProvider>
       <Router>
         <Navbar />
@@ -23,6 +25,7 @@ const App = () => {
         </Routes>
       </Router>
     </SearchProvider>
+    </AuthProvider>
   );
 };
 

@@ -1,4 +1,13 @@
 import axios from "axios";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+
+import { addDoc, collection,doc } from "firebase/firestore";
+
+import{db, auth} from "./src/firebase/firebase.config"
+
 
 //busqueda por defecto Star Wars
 export const getMovies = async (search = "Star Wars") => {
@@ -12,8 +21,6 @@ export const getMovies = async (search = "Star Wars") => {
   }
 };
 
-
-
 //busqueda por id
 
 export const getMovieId = async (id) => {
@@ -21,8 +28,25 @@ export const getMovieId = async (id) => {
   try {
     const response = await axios.get(apiUrl);
 
-    return  response.data;
+    return response.data;
   } catch (error) {
     console.error(`Error al realizar la solicitud ${error}`);
   }
 };
+
+//creando usuario con firebase
+
+export const createUser = async (email, password) => {
+  await createUserWithEmailAndPassword(auth, email, password);
+};
+
+//Cargando datos de usuario
+
+export const userDate = async (name, email, user ) => {
+ 
+  await addDoc(collection(db, "users"), {
+    name: name,
+    email: email,
+    uid: user.uid,
+  });
+}
