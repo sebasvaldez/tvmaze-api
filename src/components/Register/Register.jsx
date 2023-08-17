@@ -12,18 +12,15 @@ const Register = () => {
 
   const navigate = useNavigate();
 
-  const { createUser, db, userDate } = useAuth();
+  const { createUser } = useAuth();
 
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
       setError("");
-      const userCredential = await createUser(userReg.email, userReg.password);
-      const user = userCredential.user;
+     await createUser(userReg.email, userReg.password, name);
+     
 
-      await userDate( name, userReg.email,user.uid);  
-
-      
       navigate("/login");
     } catch (error) {
       if (error.code === "auth/invalid-email") {

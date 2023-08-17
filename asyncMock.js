@@ -2,12 +2,12 @@ import axios from "axios";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut
 } from "firebase/auth";
 
-import { addDoc, collection,doc } from "firebase/firestore";
+import { addDoc, collection, doc } from "firebase/firestore";
 
-import{db, auth} from "./src/firebase/firebase.config"
-
+import { db, auth } from "./src/firebase/firebase.config";
 
 //busqueda por defecto Star Wars
 export const getMovies = async (search = "Star Wars") => {
@@ -36,17 +36,33 @@ export const getMovieId = async (id) => {
 
 //creando usuario con firebase
 
-export const createUser = async (email, password) => {
-  await createUserWithEmailAndPassword(auth, email, password);
+export const createUser = async (email, password, name) => {
+  await createUserWithEmailAndPassword(auth, email, password).then(
+    (userCredential) => {
+      const user = userCredential.user;
+
+      addDoc(collection(db, "users"), {
+        name: name,
+        email: email,
+        uid: user.uid,
+      });
+    }
+  );
 };
 
-//Cargando datos de usuario
+// login de usuario con firebase
 
-export const userDate = async (name, email, user ) => {
- 
-  await addDoc(collection(db, "users"), {
-    name: name,
-    email: email,
-    uid: user.uid,
-  });
-}
+export const loginUser = async (email, password) => {
+  const userCredential = await signInWithEmailAndPassword(
+    auth,
+    email,
+    password
+  );
+  console.log(userCredential.user.uid);
+};
+
+//logout de usuario con firebase
+
+export const logOut = async () => {
+  await signOut(auth);
+};

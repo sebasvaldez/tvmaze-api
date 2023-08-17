@@ -13,18 +13,18 @@ import { AuthProvider } from "./contexts/AuthProvider";
 const App = () => {
   return (
     <AuthProvider>
-    <SearchProvider>
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/movieslist" element={<SearchPage />} />
-          <Route path="/item/:id" element={<ItemPage />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register/>} />
-        </Routes>
-      </Router>
-    </SearchProvider>
+      <SearchProvider>
+        <Router>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/movieslist" element={<SearchPage />} />
+            <Route path="/item/:id" element={<ItemPage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Routes>
+        </Router>
+      </SearchProvider>
     </AuthProvider>
   );
 };

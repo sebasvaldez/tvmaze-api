@@ -1,7 +1,7 @@
 import { useState, createContext, useContext, useEffect } from "react";
 import { auth } from "../firebase/firebase.config";
 import { onAuthStateChanged } from "firebase/auth";
-import { createUser, userDate } from "../../asyncMock";
+import { createUser, loginUser } from "../../asyncMock";
 import { db } from "../firebase/firebase.config";
 
 const AuthContext = createContext();
@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, createUser, db, userDate }}>
+    <AuthContext.Provider value={{ user, createUser, db,loginUser }}>
       {children}
     </AuthContext.Provider>
   );

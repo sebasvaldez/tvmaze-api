@@ -1,19 +1,61 @@
 import { Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useAuth } from "../../contexts/AuthProvider";
 import "./Login.css";
-const Login = () => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+import { useNavigate } from "react-router-dom";
 
+const Login = () => {
+  const [userLog, setUserLog] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
+  const { loginUser, user } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      await loginUser(userLog.email, userLog.password);
+
+      navigate("/movieslist");
+    } catch (error) {
+      console.log(error.code);
+      if (error.code === "auth/user-not-found") {
+        setError("El usuario no existe");
+      }
+      if (error.code === "auth/wrong-password") {
+        setError("Contraseña incorrecta");
+      }
+      if(error.code === "auth/missing-password"){
+        setError("La contraseña es requerida")
+      }
+
+    }
+  };
+  // probando el estado de user
+  console.log(user.email)
+ 
   return (
     <div className="form-class">
       <h3 className=" text-start mx-5">Ingresá con tus datos</h3>
 
       <Form onSubmit={handleSubmit}>
-        <input type="email" name="mail" placeholder="Correo electrónico" />
+        <input
+          type="email"
+          name="mail"
+          placeholder="Correo electrónico"
+          value={userLog.email}
+          onChange={(e) => setUserLog({ ...userLog, email: e.target.value })}
+        />
 
-        <input type="password" name="password" placeholder="Contraseña" />
+        <input
+          type="password"
+          name="password"
+          placeholder="Contraseña"
+          value={userLog.password}
+          onChange={(e) => setUserLog({ ...userLog, password: e.target.value })}
+        />
+
+    <p className="error">{error}</p>
 
         <Button type="submit" className="btn btn-success button-log">
           Ingresar
