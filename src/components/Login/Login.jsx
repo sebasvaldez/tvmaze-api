@@ -32,7 +32,7 @@ const Login = () => {
     }
   };
   // probando el estado de user
-  console.log(user.email)
+  
  
   return (
     <div className="form-class">

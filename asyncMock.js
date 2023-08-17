@@ -2,7 +2,7 @@ import axios from "axios";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut
+  signOut,
 } from "firebase/auth";
 
 import { addDoc, collection, doc } from "firebase/firestore";
@@ -65,4 +65,19 @@ export const loginUser = async (email, password) => {
 
 export const logOut = async () => {
   await signOut(auth);
+};
+
+//traer user por id
+
+export const getUserById = async (id) => {
+  try {
+    const docRef = doc(db, "users", id);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      return docSnap.data();
+    } else {
+      console.log("No se encuentra el usuario");
+    }
+  } catch (error) {}
 };
