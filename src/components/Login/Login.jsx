@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [userLog, setUserLog] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
-  const { loginUser, user } = useAuth();
+  const { loginUser } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -31,9 +31,7 @@ const Login = () => {
 
     }
   };
-  // probando el estado de user
-  
- 
+
   return (
     <div className="form-class">
       <h3 className=" text-start mx-5">Ingresá con tus datos</h3>

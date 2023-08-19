@@ -3,35 +3,29 @@ import { Separator } from "../src/components/Icons/Icons";
 import FormSearch from "../src/components/FormSearch/FormSearch";
 import { useAuth } from "../src/contexts/AuthProvider";
 import { useState, useEffect } from "react";
+import{ThreeDots}from "react-loader-spinner"
 
 const SearchPage = () => {
-  const { userLog, getUserById, loadingLog } = useAuth();
-const [user, setUser]= useState(null)
-const [id, setId]= useState(null)
+  const {userData, userLog} = useAuth();
 
 
 
 
-useEffect(() => {
-  if (userLog === null) {
-    console.log("Cargando...");
-  } else {
-  setId(userLog.uid)
-  getUserById(id).then((response)=> setUser(response))
-  }
-  
-}, [id]);
 
-console.log(user)
- 
+console.log(userData)
+
+
+
   return (
     <div className="mt-5 d-flex align-center flex-column">
       <FormSearch />
+        {userLog ?(userData?.name) : (<ThreeDots/>)}
       <h3 className="text-white text-start mx-5">Películas</h3>
       <Separator />
 
       <ItemListContainer />
     </div>
+    
   );
 };
 

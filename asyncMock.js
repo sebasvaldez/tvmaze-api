@@ -5,7 +5,14 @@ import {
   signOut,
 } from "firebase/auth";
 
-import { addDoc, collection, doc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  where,
+  query,
+  getDocs,
+} from "firebase/firestore";
 
 import { db, auth } from "./src/firebase/firebase.config";
 
@@ -53,12 +60,7 @@ export const createUser = async (email, password, name) => {
 // login de usuario con firebase
 
 export const loginUser = async (email, password) => {
-  const userCredential = await signInWithEmailAndPassword(
-    auth,
-    email,
-    password
-  );
-  console.log(userCredential.user.uid);
+  await signInWithEmailAndPassword(auth, email, password);
 };
 
 //logout de usuario con firebase
@@ -69,15 +71,18 @@ export const logOut = async () => {
 
 //traer user por id
 
-export const getUserById = async (id) => {
+export const getUsers = async (id) => {
   try {
-    const docRef = doc(db, "users", id);
-    const docSnap = await getDoc(docRef);
+    const q = query(collection(db, "users"), where("uid", "==", id));
+    const querySnapshot = await getDocs(q);
+    const response = [];
+    
+    querySnapshot.forEach((doc) => {
+      response.push(doc.data()); 
+    });
 
-    if (docSnap.exists()) {
-      return docSnap.data();
-    } else {
-      console.log("No se encuentra el usuario");
-    }
-  } catch (error) {}
+    return response[0]; 
+  } catch (error) {
+    console.error(`Error al realizar la solicitud ${error}`);
+  }
 };
