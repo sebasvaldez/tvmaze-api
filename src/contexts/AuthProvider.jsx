@@ -12,29 +12,33 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
+  const localStorage = window.localStorage;
+
   const [userLog, setUserLog] = useState(null);
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    const loged = onAuthStateChanged(auth, (currentUser) => {
-      setUserLog(currentUser);
-    });
-    return loged;
-  }, []);
+    onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUserLog(currentUser.uid);
+      } else {
+        console.log("No hay usuario logueado");
+      }
 
-  useEffect(() => {
-    if (userLog !== null) {
       const getUser = async () => {
         try {
-          const res = await getUsers(userLog.uid);
-          setUserData(res);
+          const res = await getUsers(userLog);
+          localStorage.setItem("user", JSON.stringify(res.name));
+
+          setUserData(JSON.parse(localStorage.getItem("user")));
         } catch (error) {
           console.log(error);
         }
       };
+
       getUser();
-    }
-  }, [2000]);
+    });
+  }, []);
 
   return (
     <AuthContext.Provider
@@ -46,7 +50,6 @@ export const AuthProvider = ({ children }) => {
         logOut,
         getUsers,
         userData,
-        setUserData
       }}
     >
       {children}

@@ -8,13 +8,15 @@ import {
 import {
   addDoc,
   collection,
-  doc,
   where,
   query,
   getDocs,
 } from "firebase/firestore";
 
 import { db, auth } from "./src/firebase/firebase.config";
+
+
+const localStorage = window.localStorage;
 
 //busqueda por defecto Star Wars
 export const getMovies = async (search = "Star Wars") => {
@@ -67,6 +69,7 @@ export const loginUser = async (email, password) => {
 
 export const logOut = async () => {
   await signOut(auth);
+  localStorage.clear();
 };
 
 //traer user por id
