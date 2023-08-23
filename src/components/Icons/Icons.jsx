@@ -41,7 +41,7 @@ export const Separator = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="340"
+      width="80%"
       height="1"
       viewBox="0 0 360 1"
       className="mx-auto"

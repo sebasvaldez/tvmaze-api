@@ -4,33 +4,42 @@ import { HomeIcon, Login, SearchIcon } from "../Icons/Icons";
 import { useState } from "react";
 import { useAuth } from "../../contexts/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import { getUsers } from "../../../asyncMock";
+
+import {Circles} from "react-loader-spinner";
 
 const Navbar = () => {
-  const [iconSelected, setIconSelected] = useState("home");
-  const { userLog, logOut,userData } = useAuth();
-  const localStorage = window.localStorage;
   const navigate = useNavigate();
+  const [iconSelected, setIconSelected] = useState("home");
+  const { userLog, logOut, userData } = useAuth();
+  const localStorage = window.localStorage;
+  const userName = localStorage.getItem("user");
 
   const handleIconSelected = (iconName) => {
     setIconSelected(iconName);
   };
 
   const handleLogOut = () => {
-    
     logOut();
     navigate("/");
-  }
+  };
 
-
-  console.log(userLog)
-  console.log(userData)
-
+  console.log(userLog);
+ 
   return (
     <div className="navbar-class ">
       <div className="icons-home d-flex">
+        {userName ? (
+          <div className="d-flex align-items-center">
+            <p className="m-0  text-white">Hola {userName}</p>
+          </div>
+        ) : (
+          ""
+        )}
         <div>
           {!userLog ? (
-            <Link to="/login">
+            <Link to={"/login"}>
               <Login
                 onClick={() => {
                   handleIconSelected("login");
@@ -39,13 +48,11 @@ const Navbar = () => {
               />
             </Link>
           ) : (
-            <div>  |
-            <button
-              onClick={handleLogOut}
-            >
-              logout
-            </button>
-            <p></p>
+            <div>
+              <Button className="" onClick={handleLogOut}>
+                logout
+              </Button>
+              { !userLog ? (<Circles />) : ("hola: "+ userData)}
             </div>
           )}
         </div>

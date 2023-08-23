@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthProvider";
 
-
 const Register = () => {
   const [userReg, setUserReg] = useState({ email: "", password: "" });
   const [name, setName] = useState("");
@@ -18,8 +17,7 @@ const Register = () => {
     try {
       e.preventDefault();
       setError("");
-     await createUser(userReg.email, userReg.password, name);
-     
+      await createUser(userReg.email, userReg.password, name);
 
       navigate("/login");
     } catch (error) {

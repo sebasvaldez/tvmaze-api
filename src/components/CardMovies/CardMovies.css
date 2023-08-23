@@ -6,7 +6,6 @@
 @media all and (min-width: 360px) {
   .card-styles {
     width: 160px;
-
     margin-bottom: 1rem;
     border: none;
   }
@@ -23,5 +22,20 @@
   .link{
     color: whitesmoke;
     text-decoration: none;
+  }
+}
+
+@media all and (min-width:768px){
+  .card-styles{
+    width: 210px;
+    
+   
+  }
+}
+
+@media all and (min-width:1024px){
+  .card-styles{
+    width: 210px;
+  
   }
 }

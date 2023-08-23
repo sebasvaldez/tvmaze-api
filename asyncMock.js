@@ -5,16 +5,9 @@ import {
   signOut,
 } from "firebase/auth";
 
-import {
-  addDoc,
-  collection,
-  where,
-  query,
-  getDocs,
-} from "firebase/firestore";
+import { addDoc, collection, where, query, getDocs } from "firebase/firestore";
 
 import { db, auth } from "./src/firebase/firebase.config";
-
 
 const localStorage = window.localStorage;
 
@@ -58,9 +51,8 @@ export const createUser = async (email, password, name) => {
     }
   );
 };
-
 // login de usuario con firebase
-
+ 
 export const loginUser = async (email, password) => {
   await signInWithEmailAndPassword(auth, email, password);
 };
@@ -69,7 +61,7 @@ export const loginUser = async (email, password) => {
 
 export const logOut = async () => {
   await signOut(auth);
-  localStorage.clear();
+  localStorage.removeItem("user");
 };
 
 //traer user por id
@@ -79,12 +71,12 @@ export const getUsers = async (id) => {
     const q = query(collection(db, "users"), where("uid", "==", id));
     const querySnapshot = await getDocs(q);
     const response = [];
-    
+
     querySnapshot.forEach((doc) => {
-      response.push(doc.data()); 
+      response.push(doc.data());
     });
 
-    return response[0]; 
+    return response[0];
   } catch (error) {
     console.error(`Error al realizar la solicitud ${error}`);
   }
