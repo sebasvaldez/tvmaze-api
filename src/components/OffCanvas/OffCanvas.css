@@ -1,0 +1,27 @@
+@media all and (min-width: 360px){
+
+    .offcanvas-start{
+        width: 45%!important;
+        background-color: #1A3249;
+    }
+    .name-canvas{
+        font-size: 12px;
+        font-weight: 600;
+    }
+}
+
+@media all and (min-width: 768px){
+
+    .offcanvas-start{
+        width: 30%!important;
+    }
+}
+
+
+@media all and (min-width: 1024px){
+
+    .offcanvas-start{
+        width: 30%!important;
+    }
+}
+

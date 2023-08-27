@@ -2,7 +2,7 @@
     .navbar-class{
         display: flex;
         flex-direction: row;
-        justify-content: end;
+        justify-content: space-between;
         
     }
     .icons-home{

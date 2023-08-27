@@ -5,9 +5,7 @@ import { useState } from "react";
 import { useAuth } from "../../contexts/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import { getUsers } from "../../../asyncMock";
-
-import {Circles} from "react-loader-spinner";
+import OffCanvas from "../offCanvas/offCanvas";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -25,18 +23,12 @@ const Navbar = () => {
     navigate("/");
   };
 
-  console.log(userLog);
- 
+  // console.log(userLog);
+
   return (
     <div className="navbar-class ">
-      <div className="icons-home d-flex">
-        {userName ? (
-          <div className="d-flex align-items-center">
-            <p className="m-0  text-white">Hola {userName}</p>
-          </div>
-        ) : (
-          ""
-        )}
+      <div>{userLog ? <OffCanvas /> : ""}</div>
+      <div className="d-flex">
         <div>
           {!userLog ? (
             <Link to={"/login"}>
@@ -49,13 +41,13 @@ const Navbar = () => {
             </Link>
           ) : (
             <div>
-              <Button className="" onClick={handleLogOut}>
+              <Button className="" size="sm" onClick={handleLogOut}>
                 logout
               </Button>
-              { !userLog ? (<Circles />) : ("hola: "+ userData)}
             </div>
           )}
         </div>
+
         <div className="mx-3">
           <Link to="/">
             <HomeIcon
@@ -66,6 +58,7 @@ const Navbar = () => {
             />
           </Link>
         </div>
+
         <div className="">
           <Link to="/movieslist">
             <SearchIcon

@@ -5,7 +5,7 @@ import {
   signOut,
 } from "firebase/auth";
 
-import { addDoc, collection, where, query, getDocs } from "firebase/firestore";
+import { addDoc, collection, where, query, getDocs, deleteDoc } from "firebase/firestore";
 
 import { db, auth } from "./src/firebase/firebase.config";
 
@@ -52,7 +52,7 @@ export const createUser = async (email, password, name) => {
   );
 };
 // login de usuario con firebase
- 
+
 export const loginUser = async (email, password) => {
   await signInWithEmailAndPassword(auth, email, password);
 };
@@ -81,3 +81,20 @@ export const getUsers = async (id) => {
     console.error(`Error al realizar la solicitud ${error}`);
   }
 };
+
+//cargar favoritos
+
+export const addToFavorites = async (uid, id) => {
+  await addDoc(collection(db, "favorites"), {
+    id:id,
+    uid:uid,
+  });
+};
+
+
+//eliminar favoritos
+export const removeToFavorites = async ()=>{
+
+await deleteDoc(doc(db, "favorites", "favoriteId"))
+
+}

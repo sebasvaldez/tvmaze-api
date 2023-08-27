@@ -1,0 +1,26 @@
+/* Agrega estos estilos en tu archivo de hojas de estilo CSS o en línea en el componente */
+.favorite-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  padding: 0;
+  font-size: 32px;
+  color: gray; /* Color de la estrella sin seleccionar */
+  transition: color 0.3s ease; /* Transición de color suave */
+}
+
+.favorite-button.active {
+  color: gold; /* Color de la estrella seleccionada */
+  animation: pulse 1s infinite; /* Animación de pulso */
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
