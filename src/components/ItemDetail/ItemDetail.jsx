@@ -3,11 +3,9 @@ import Loader from "../Loader/Loader";
 import sinPortada from "./assets/sin-portada.png";
 import FormSearch from "../FormSearch/FormSearch";
 import Favorites from "../Favorites/Favorites";
-import { useAuth } from "../../contexts/AuthProvider";
 
 const ItemDetail = ({ item, isLoading }) => {
   const { name, genres, summary, url, image, webChannel, language, id } = item;
-  const { userLog } = useAuth();
 
   return (
     <div>

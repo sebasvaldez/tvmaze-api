@@ -5,7 +5,14 @@ import {
   signOut,
 } from "firebase/auth";
 
-import { addDoc, collection, where, query, getDocs, deleteDoc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  where,
+  query,
+  getDocs,
+  deleteDoc,
+} from "firebase/firestore";
 
 import { db, auth } from "./src/firebase/firebase.config";
 
@@ -86,15 +93,28 @@ export const getUsers = async (id) => {
 
 export const addToFavorites = async (uid, id) => {
   await addDoc(collection(db, "favorites"), {
-    id:id,
-    uid:uid,
+    id: id,
+    uid: uid,
   });
 };
 
-
 //eliminar favoritos
-export const removeToFavorites = async ()=>{
+export const removeToFavorites = async () => {
+  await deleteDoc(doc(db, "favorites", "favoriteId"));
+};
 
-await deleteDoc(doc(db, "favorites", "favoriteId"))
+export const getFavorites = async (uid) => {
+  try {
+    const q = query(collection(db, "favorites"), where("uid", "==", uid));
+    const querySnapshot = await getDocs(q);
+    const response = [];
 
-}
+    querySnapshot.forEach((doc) => {
+      response.push(doc.data());
+    });
+
+    return response;
+  } catch (error) {
+    console.error(`Error al realizar la solicitud ${error}`);
+  }
+};

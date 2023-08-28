@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { HomeIcon, Login, SearchIcon } from "../Icons/Icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
@@ -10,9 +10,9 @@ import OffCanvas from "../offCanvas/offCanvas";
 const Navbar = () => {
   const navigate = useNavigate();
   const [iconSelected, setIconSelected] = useState("home");
-  const { userLog, logOut, userData } = useAuth();
+  const { userLog, logOut } = useAuth();
   const localStorage = window.localStorage;
-  const userName = localStorage.getItem("user");
+  // const userName = localStorage.getItem("user");
 
   const handleIconSelected = (iconName) => {
     setIconSelected(iconName);
@@ -23,7 +23,8 @@ const Navbar = () => {
     navigate("/");
   };
 
-  // console.log(userLog);
+  
+  
 
   return (
     <div className="navbar-class ">
