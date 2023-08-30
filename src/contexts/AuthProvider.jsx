@@ -17,8 +17,6 @@ export const useAuth = () => {
   return context;
 };
 
-
-
 export const AuthProvider = ({ children }) => {
   const localStorage = window.localStorage;
 
@@ -26,24 +24,19 @@ export const AuthProvider = ({ children }) => {
   const [userData, setUserData] = useState(null);
   const [dataLoaded, setDataLoaded] = useState(false);
   const [favorites, setFavorites] = useState([]);
-
-
-
+  
   const getUser = async () => {
     try {
-      const res = await getUsers(userLog.uid);
-  
-      setUserData(res.name);
-      setDataLoaded(true);
+      if (userLog) {
+        const res = await getUsers(userLog.uid);
+
+        setUserData(res.name);
+        setDataLoaded(true);
+      }
     } catch (error) {
       console.log(error);
     }
   };
-
-
-
-
-
 
 
   useEffect(() => {
@@ -51,18 +44,32 @@ export const AuthProvider = ({ children }) => {
       setUserLog(currentUser);
     });
 
-    if (userLog) {
-      getUser();
-      getFavorites(userLog.uid).then((res)=>{setFavorites(res)})
-    }
+    getUser();
+    
   }, [userLog]);
 
   useEffect(() => {
     if (dataLoaded && userData) {
       localStorage.setItem("user", userData);
+     
     }
+    
   }, [dataLoaded, userData]);
 
+
+  useEffect(() => {
+    if(userLog){
+      getFavorites(userLog.uid).then((res) => {
+        setFavorites(res);
+        
+        console.log(res)
+      });
+      
+    }
+  },[userLog])
+
+  
+  console.log(favorites)
 
 
   return (

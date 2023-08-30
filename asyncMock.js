@@ -18,6 +18,8 @@ import { db, auth } from "./src/firebase/firebase.config";
 
 const localStorage = window.localStorage;
 
+const sinPortada = "https://firebasestorage.googleapis.com/v0/b/mazetv-e7cb9.appspot.com/o/assets%2Fsin-portada.png?alt=media&token=6082a1a9-098d-438c-ad9e-d5eb4fc63f8d";
+
 //busqueda por defecto Star Wars
 export const getMovies = async (search = "Star Wars") => {
   const apiUrl = `http://api.tvmaze.com/search/shows?q=${search}`;
@@ -89,12 +91,14 @@ export const getUsers = async (id) => {
   }
 };
 
-//cargar favoritos
+//agregar favoritos
 
-export const addToFavorites = async (uid, id) => {
+export const addToFavorites = async (uid, id, movieName, image) => {
   await addDoc(collection(db, "favorites"), {
     id: id,
     uid: uid,
+    name: movieName,
+    image: image ? image : sinPortada,
   });
 };
 

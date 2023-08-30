@@ -3,33 +3,18 @@ import { useState, useEffect } from "react";
 import { Offcanvas, Button } from "react-bootstrap";
 import { Burger } from "../Icons/Icons";
 import { useAuth } from "../../contexts/AuthProvider";
-import { getMovieId } from "../../../asyncMock";
+
 import Loader from "../Loader/Loader";
+import sinPortada from "../../assets/sin-portada.png";
 
 const OffCanvas = () => {
   const localStorage = window.localStorage;
   const userName = localStorage.getItem("user");
-  const [show, setShow] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [moviesFav, setMoviesFav] = useState([]); //aca van a ir los favoritos
 
+  const [show, setShow] = useState(false);
+  // const [isLoading, setIsLoading] = useState(true);
   const { favorites } = useAuth();
 
-  useEffect(() => {
-    try {
-      favorites.map((movie) => {
-        getMovieId(movie.id).then((data) =>
-          console.log(data)
-        );
-        setIsLoading(false);
-      });
-    } catch (error) {
-      console.log(error);
-      setIsLoading(false);
-    }
-  }, []);
-
- 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -46,17 +31,21 @@ const OffCanvas = () => {
           </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body className="text-white">
-          {/* {isLoading ? (
+          {!favorites ? (
             <Loader />
           ) : (
-            moviesFav.map((movie) => {
+            favorites.map((movie) => {
               return (
-                <div key={movie.id}>
-                  <h6>{movie.id}</h6>
+                <div className="canvas-stile" key={movie.id}>
+                  <img
+                    src={movie.image == null ? sinPortada : movie.image.medium}
+                    alt="imagen de portada de cada pelicula"
+                  />
+                  <h6>{movie.name}</h6>
                 </div>
               );
             })
-          )} */}
+          )}
         </Offcanvas.Body>
       </Offcanvas>
     </>

@@ -1,6 +1,6 @@
 import "./CardMovies.css";
 import { Link } from "react-router-dom";
-import sinPortada from "./assets/sin-portada.png";
+import sinPortada from "../../assets/sin-portada.png";
 
 const CardMovies = ({ movies }) => {
   return movies.map(({ show }) => {

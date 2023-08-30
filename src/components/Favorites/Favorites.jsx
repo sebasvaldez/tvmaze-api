@@ -1,14 +1,14 @@
 import "./Favorites.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-import { useParams } from "react-router-dom";
+
 import Swal from "sweetalert2";
 import { useAuth } from "../../contexts/AuthProvider";
 import { getAuth } from "firebase/auth";
 import { addToFavorites } from "../../../asyncMock";
 
-const Favorites = () => {
-  const { id } = useParams();
+const Favorites = ({item}) => {
+  const {name,id,image} = item;
 
   //este estado es para cambiar el color del boton
   const [isFavorite, setIsFavorite] = useState(false);
@@ -18,18 +18,12 @@ const Favorites = () => {
   const auth = getAuth();
   const user = auth.currentUser;
 
-  // const addToFavorites = async () => {
-  //   console.log("Agregado a favoritos");
-  //   setIsFavorite(true);
-
-  //   console.log(user.uid);
-  //   console.log(id);
-  // };
-
   const removeFromFavorites = async () => {
     console.log("Removido de favoritos");
     setIsFavorite(false);
   };
+
+
 
   return (
     <button
@@ -38,7 +32,9 @@ const Favorites = () => {
         userLog
           ? isFavorite
             ? removeFromFavorites()
-            : addToFavorites(user.uid, id).then(setIsFavorite(true))
+            : addToFavorites(user.uid, id, name, image).then(
+                setIsFavorite(true)
+              )
           : Swal.fire("Debes estar logueado para agregar a favoritos");
       }}
     >

@@ -8,6 +8,10 @@
         font-size: 12px;
         font-weight: 600;
     }
+    .canvas-stile{
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 @media all and (min-width: 768px){

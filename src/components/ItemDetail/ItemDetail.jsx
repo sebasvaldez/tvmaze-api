@@ -7,6 +7,8 @@ import Favorites from "../Favorites/Favorites";
 const ItemDetail = ({ item, isLoading }) => {
   const { name, genres, summary, url, image, webChannel, language, id } = item;
 
+
+
   return (
     <div>
       <FormSearch />
@@ -24,7 +26,8 @@ const ItemDetail = ({ item, isLoading }) => {
             <div className="item-detail__info text-white">
               <div className="item-detail__title">
                 <h1>{name}</h1>
-                <Favorites idMovie={id} />
+
+                <Favorites item={item} />
               </div>
               <h4>{genres == null ? <p>cargando</p> : genres.join(" | ")}</h4>
               <p>
