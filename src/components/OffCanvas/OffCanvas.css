@@ -8,10 +8,28 @@
         font-size: 12px;
         font-weight: 600;
     }
-    .canvas-stile{
+    .offcanvas-body{
         display: flex;
         flex-direction: column;
+        align-items: center;
     }
+
+    .canvas-style{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    .canvas-style img{
+        width: 100%;
+    }
+    .canvas-style a, h6{
+        font-size: 14px;
+        font-weight: 600;
+        color: #fff;
+        text-decoration: none;
+    }
+
 }
 
 @media all and (min-width: 768px){
@@ -19,6 +37,7 @@
     .offcanvas-start{
         width: 30%!important;
     }
+    
 }
 
 
@@ -26,6 +45,15 @@
 
     .offcanvas-start{
         width: 30%!important;
+    }
+    .offcanvas-body{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .canvas-style{
+        width: 45%;
     }
 }
 

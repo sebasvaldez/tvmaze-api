@@ -7,8 +7,6 @@ import Favorites from "../Favorites/Favorites";
 const ItemDetail = ({ item, isLoading }) => {
   const { name, genres, summary, url, image, webChannel, language, id } = item;
 
-
-
   return (
     <div>
       <FormSearch />

@@ -1,6 +1,7 @@
 import { useState, createContext, useContext, useEffect } from "react";
 import { auth } from "../firebase/firebase.config";
 import { onAuthStateChanged } from "firebase/auth";
+import { onSnapshot, collection, where,query } from "firebase/firestore";
 import {
   createUser,
   loginUser,
@@ -24,7 +25,7 @@ export const AuthProvider = ({ children }) => {
   const [userData, setUserData] = useState(null);
   const [dataLoaded, setDataLoaded] = useState(false);
   const [favorites, setFavorites] = useState([]);
-  
+
   const getUser = async () => {
     try {
       if (userLog) {
@@ -38,40 +39,35 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       setUserLog(currentUser);
     });
 
     getUser();
-    
   }, [userLog]);
 
   useEffect(() => {
     if (dataLoaded && userData) {
       localStorage.setItem("user", userData);
-     
     }
-    
   }, [dataLoaded, userData]);
 
-
   useEffect(() => {
+    const favoritesCollection = collection(db, "favorites");
     if(userLog){
-      getFavorites(userLog.uid).then((res) => {
-        setFavorites(res);
-        
-        console.log(res)
+
+      const unSuscribe = onSnapshot(query(favoritesCollection, where("uid", "==", userLog?.uid)), (snapshot) => {
+        const updatedFavorites = [];
+        snapshot.forEach((doc) => {
+          updatedFavorites.push(doc.data());
+        });
+        setFavorites(updatedFavorites);
       });
-      
     }
-  },[userLog])
-
-  
-  console.log(favorites)
-
-
+  }, []);
+ 
+  console.log(favorites);
   return (
     <AuthContext.Provider
       value={{
@@ -82,7 +78,7 @@ export const AuthProvider = ({ children }) => {
         logOut,
         getUsers,
         userData,
-        favorites
+        favorites,
       }}
     >
       {children}

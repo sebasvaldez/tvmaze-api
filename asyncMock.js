@@ -103,8 +103,8 @@ export const addToFavorites = async (uid, id, movieName, image) => {
 };
 
 //eliminar favoritos
-export const removeToFavorites = async () => {
-  await deleteDoc(doc(db, "favorites", "favoriteId"));
+export const removeToFavorites = async (id) => {
+  await deleteDoc(doc(db, "favorites", id));
 };
 
 export const getFavorites = async (uid) => {

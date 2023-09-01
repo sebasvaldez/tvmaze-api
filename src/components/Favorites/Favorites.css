@@ -15,6 +15,9 @@
   animation: pulse 1s infinite; /* Animación de pulso */
 }
 
+
+
+
 @keyframes pulse {
   0%,
   100% {

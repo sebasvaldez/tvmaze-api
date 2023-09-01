@@ -1,11 +1,12 @@
 import "./offCanvas.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Offcanvas, Button } from "react-bootstrap";
 import { Burger } from "../Icons/Icons";
 import { useAuth } from "../../contexts/AuthProvider";
 
 import Loader from "../Loader/Loader";
 import sinPortada from "../../assets/sin-portada.png";
+import { Link } from "react-router-dom";
 
 const OffCanvas = () => {
   const localStorage = window.localStorage;
@@ -36,12 +37,14 @@ const OffCanvas = () => {
           ) : (
             favorites.map((movie) => {
               return (
-                <div className="canvas-stile" key={movie.id}>
+                <div className="canvas-style" key={movie.id}>
+                  <Link  to={`/item/${movie.id}`}>
                   <img
                     src={movie.image == null ? sinPortada : movie.image.medium}
                     alt="imagen de portada de cada pelicula"
                   />
                   <h6>{movie.name}</h6>
+                  </Link>
                 </div>
               );
             })
