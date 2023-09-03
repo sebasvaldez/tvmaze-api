@@ -19,7 +19,7 @@ const Register = () => {
       setError("");
       await createUser(userReg.email, userReg.password, name);
 
-      navigate("/login");
+      navigate("/movieslist");
     } catch (error) {
       if (error.code === "auth/invalid-email") {
         setError("El correo electrónico no es válido");

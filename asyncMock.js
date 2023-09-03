@@ -12,13 +12,15 @@ import {
   query,
   getDocs,
   deleteDoc,
+  doc,
 } from "firebase/firestore";
 
 import { db, auth } from "./src/firebase/firebase.config";
 
 const localStorage = window.localStorage;
 
-const sinPortada = "https://firebasestorage.googleapis.com/v0/b/mazetv-e7cb9.appspot.com/o/assets%2Fsin-portada.png?alt=media&token=6082a1a9-098d-438c-ad9e-d5eb4fc63f8d";
+const sinPortada =
+  "https://firebasestorage.googleapis.com/v0/b/mazetv-e7cb9.appspot.com/o/assets%2Fsin-portada.png?alt=media&token=6082a1a9-098d-438c-ad9e-d5eb4fc63f8d";
 
 //busqueda por defecto Star Wars
 export const getMovies = async (search = "Star Wars") => {
@@ -104,7 +106,19 @@ export const addToFavorites = async (uid, id, movieName, image) => {
 
 //eliminar favoritos
 export const removeToFavorites = async (id) => {
-  await deleteDoc(doc(db, "favorites", id));
+  try {
+    const favoriteDocRef = collection(db, "favorites");
+    const q = query(favoriteDocRef, where("id", "==", id));
+
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      deleteDoc(doc.ref);
+    });
+
+    
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const getFavorites = async (uid) => {

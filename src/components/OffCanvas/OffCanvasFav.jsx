@@ -8,7 +8,7 @@ import Loader from "../Loader/Loader";
 import sinPortada from "../../assets/sin-portada.png";
 import { Link } from "react-router-dom";
 
-const OffCanvas = () => {
+const OffCanvasFav = () => {
   const localStorage = window.localStorage;
   const userName = localStorage.getItem("user");
 
@@ -55,4 +55,4 @@ const OffCanvas = () => {
   );
 };
 
-export default OffCanvas;
+export default OffCanvasFav;

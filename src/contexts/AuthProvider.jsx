@@ -7,7 +7,6 @@ import {
   loginUser,
   logOut,
   getUsers,
-  getFavorites,
 } from "../../asyncMock";
 import { db } from "../firebase/firebase.config";
 
@@ -65,9 +64,9 @@ export const AuthProvider = ({ children }) => {
         setFavorites(updatedFavorites);
       });
     }
-  }, []);
+  }, [userLog]);
  
-  console.log(favorites);
+
   return (
     <AuthContext.Provider
       value={{
@@ -79,6 +78,7 @@ export const AuthProvider = ({ children }) => {
         getUsers,
         userData,
         favorites,
+        setFavorites
       }}
     >
       {children}

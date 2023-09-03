@@ -1,10 +1,8 @@
 import "./Favorites.css";
 import { useEffect, useState } from "react";
-
 import Swal from "sweetalert2";
 import { useAuth } from "../../contexts/AuthProvider";
-import { getAuth } from "firebase/auth";
-import { addToFavorites } from "../../../asyncMock";
+import { addToFavorites, removeToFavorites } from "../../../asyncMock";
 
 const Favorites = ({ item }) => {
   const { name, id, image } = item;
@@ -17,19 +15,12 @@ const Favorites = ({ item }) => {
 
   const { userLog, favorites } = useAuth();
 
-  const auth = getAuth();
-  const user = auth.currentUser;
-
-  const removeFromFavorites = async () => {
-    console.log("Removido de favoritos");
-    setIsFavorite(false);
-  };
-
+ 
   useEffect(() => {
     if(userLog){
 
       setIsFavorite(favorites.some((favorite) => favorite.id === idToCheck));
-      console.log(isFavorite);
+      
     }
   }, [favorites, idToCheck, userLog]);
 
@@ -41,10 +32,9 @@ const Favorites = ({ item }) => {
         userLog
           ? isFavorite //si el id de la pelicula esta en el array de favoritos
             ? (
-              removeFromFavorites()
-              
+              removeToFavorites(idToCheck).then(setIsFavorite(false))
               )
-            : addToFavorites(user.uid, id, name, image).then(
+            : addToFavorites(userLog.uid, id, name, image).then(
                 setIsFavorite(true)
               )
           : Swal.fire("Debes estar logueado para agregar a favoritos");

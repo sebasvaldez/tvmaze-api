@@ -19,7 +19,7 @@ const ItemDetailContainer = () => {
       console.log(error);
       setIsLoading(false);
     }
-  }, []);
+  }, [id]);
 
   
   return (

@@ -10,6 +10,7 @@
     border-radius: 12px;
     margin-left: .7rem;
     margin-right: .7rem;
+    height: 50vh;
   }
   .form-class form{
     display: flex;

@@ -5,14 +5,12 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import OffCanvas from "../offCanvas/offCanvas";
+import OffCanvasFav from "../OffCanvas/OffCanvasFav";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [iconSelected, setIconSelected] = useState("home");
-  const { userLog, logOut } = useAuth();
-  const localStorage = window.localStorage;
-  // const userName = localStorage.getItem("user");
+  const { userLog, logOut, setFavorites } = useAuth();
 
   const handleIconSelected = (iconName) => {
     setIconSelected(iconName);
@@ -20,15 +18,13 @@ const Navbar = () => {
 
   const handleLogOut = () => {
     logOut();
+    setFavorites([]);
     navigate("/");
   };
 
-  
-  
-
   return (
     <div className="navbar-class ">
-      <div>{userLog ? <OffCanvas /> : ""}</div>
+      <div>{userLog ? <OffCanvasFav /> : ""}</div>
       <div className="d-flex">
         <div>
           {!userLog ? (

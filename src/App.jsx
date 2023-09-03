@@ -9,6 +9,7 @@ import SearchProvider from "./contexts/SearchProvider";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import { AuthProvider } from "./contexts/AuthProvider";
+import Footer from "./components/Footer/Footer";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Routes>
+          <Footer />
         </Router>
       </SearchProvider>
     </AuthProvider>
